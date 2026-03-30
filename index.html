@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tim Liang - Portfolio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            overflow-x: hidden;
+            color: white;
+        }
+
+        /* Sky Background */
+        .sky-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, #60a5fa, #93c5fd, #bfdbfe);
+            z-index: -1;
+        }
+
+        /* Cloud Animation */
+        .cloud {
+            position: absolute;
+            opacity: 0.8;
+            animation: float 30s infinite ease-in-out;
+        }
+
+        .cloud svg {
+            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+        }
+
+        .cloud:nth-child(1) { left: 10%; top: 15%; animation-duration: 25s; }
+        .cloud:nth-child(2) { left: 30%; top: 25%; animation-duration: 30s; animation-delay: -5s; }
+        .cloud:nth-child(3) { left: 60%; top: 10%; animation-duration: 28s; animation-delay: -10s; }
+        .cloud:nth-child(4) { left: 80%; top: 30%; animation-duration: 32s; animation-delay: -15s; }
+        .cloud:nth-child(5) { left: 45%; top: 40%; animation-duration: 27s; animation-delay: -20s; }
+        .cloud:nth-child(6) { left: 15%; top: 50%; animation-duration: 35s; animation-delay: -25s; }
+        .cloud:nth-child(7) { left: 70%; top: 55%; animation-duration: 29s; animation-delay: -12s; }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0); }
+            50% { transform: translate(30px, -15px); }
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            right: 0;
+            padding: 2rem;
+            z-index: 50;
+        }
+
+        nav ul {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.125rem;
+            font-weight: 500;
+            transition: opacity 0.3s;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        nav a:hover {
+            opacity: 0.8;
+        }
+
+        nav a.active {
+            text-decoration: underline;
+            text-decoration-thickness: 2px;
+            text-underline-offset: 4px;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            text-align: center;
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        .hero-content {
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .typewriter-welcome {
+            font-size: 3rem;
+            font-family: 'Courier New', monospace;
+            margin-bottom: 2rem;
+            min-height: 4rem;
+        }
+
+        .cursor {
+            animation: blink 1s infinite;
+        }
+
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+
+        .intro-text {
+            font-size: 1.5rem;
+            font-weight: 300;
+            margin-bottom: 1rem;
+        }
+
+        .name {
+            font-size: 6rem;
+            font-weight: bold;
+            margin-bottom: 1.5rem;
+            line-height: 1.1;
+        }
+
+        .subtitle {
+            font-size: 1.5rem;
+            font-weight: 300;
+            margin-bottom: 3rem;
+            max-width: 42rem;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Scroll Indicator */
+        .scroll-indicator {
+            position: absolute;
+            bottom: 3rem;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: bounce 2s infinite;
+        }
+
+        .scroll-indicator-box {
+            width: 1.5rem;
+            height: 2.5rem;
+            border: 2px solid white;
+            border-radius: 1.25rem;
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            padding: 0.5rem 0;
+        }
+
+        .scroll-dot {
+            width: 0.375rem;
+            height: 0.375rem;
+            background: white;
+            border-radius: 50%;
+            animation: scrollDot 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(10px); }
+        }
+
+        @keyframes scrollDot {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(12px); }
+        }
+
+        /* About Section */
+        .about-section {
+            min-height: 100vh;
+            padding: 6rem 2rem;
+            position: relative;
+        }
+
+        .about-container {
+            max-width: 56rem;
+            margin: 0 auto;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .about-header {
+            font-size: 3.5rem;
+            font-weight: bold;
+            margin-bottom: 4rem;
+        }
+
+        .typewriter-profession {
+            font-family: 'Courier New', monospace;
+        }
+
+        .about-content {
+            display: flex;
+            flex-direction: column;
+            gap: 3rem;
+        }
+
+        .about-item {
+            animation: slideIn 0.6s ease-out;
+        }
+
+        .about-item h2 {
+            font-size: 1.875rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+
+        .about-item p {
+            font-size: 1.125rem;
+            line-height: 1.75;
+            opacity: 0.9;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(-30px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .name {
+                font-size: 4rem;
+            }
+
+            .typewriter-welcome {
+                font-size: 2rem;
+            }
+
+            .about-header {
+                font-size: 2.5rem;
+            }
+
+            nav ul {
+                gap: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .name {
+                font-size: 3rem;
+            }
+
+            .typewriter-welcome {
+                font-size: 1.5rem;
+            }
+
+            .intro-text, .subtitle {
+                font-size: 1.25rem;
+            }
+
+            .about-header {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Sky Background -->
+    <div class="sky-background">
+        <div class="cloud">
+            <svg width="144" height="72" viewBox="0 0 120 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <ellipse cx="30" cy="40" rx="25" ry="20" fill="white" fill-opacity="0.9" />
+                <ellipse cx="55" cy="30" rx="30" ry="25" fill="white" fill-opacity="0.9" />
+                <ellipse cx="80" cy="35" rx="28" ry="22" fill="white" fill-opacity="0.9" />
+                <ellipse cx="95" cy="42" rx="20" ry="18" fill="white" fill-opacity="0.9" />
+            </svg>
+        </div>
+        <div class="cloud">
+            <svg width="96" height="48" viewBox="0 0 120 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <ellipse cx="30" cy="40" rx="25" ry="20" fill="white" fill-opacity="0.9" />
+                <ellipse cx="55" cy="30" rx="30" ry="25" fill="white" fill-opacity="0.9" />
+                <ellipse cx="80" cy="35" rx="28" ry="22" fill="white" fill-opacity="0.9" />
+                <ellipse cx="95" cy="42" rx="20" ry="18" fill="white" fill-opacity="0.9" />
+            </svg>
+        </div>
+        <div class="cloud">
+            <svg width="120" height="60" viewBox="0 0 120 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <ellipse cx="30" cy="40" rx="25" ry="20" fill="white" fill-opacity="0.9" />
+                <ellipse cx="55" cy="30" rx="30" ry="25" fill="white" fill-opacity="0.9" />
+                <ellipse cx="80" cy="35" rx="28" ry="22" fill="white" fill-opacity="0.9" />
+                <ellipse cx="95" cy="42" rx="20" ry="18" fill="white" fill-opacity="0.9" />
+            </svg>
+        </div>
+        <div class="cloud">
+            <svg width="132" height="66" viewBox="0 0 120 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <ellipse cx="30" cy="40" rx="25" ry="20" fill="white" fill-opacity="0.9" />
+                <ellipse cx="55" cy="30" rx="30" ry="25" fill="white" fill-opacity="0.9" />
+                <ellipse cx="80" cy="35" rx="28" ry="22" fill="white" fill-opacity="0.9" />
+                <ellipse cx="95" cy="42" rx="20" ry="18" fill="white" fill-opacity="0.9" />
+            </svg>
+        </div>
+        <div class="cloud">
+            <svg width="108" height="54" viewBox="0 0 120 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <ellipse cx="30" cy="40" rx="25" ry="20" fill="white" fill-opacity="0.9" />
+                <ellipse cx="55" cy="30" rx="30" ry="25" fill="white" fill-opacity="0.9" />
+                <ellipse cx="80" cy="35" rx="28" ry="22" fill="white" fill-opacity="0.9" />
+                <ellipse cx="95" cy="42" rx="20" ry="18" fill="white" fill-opacity="0.9" />
+            </svg>
+        </div>
+        <div class="cloud">
+            <svg width="156" height="78" viewBox="0 0 120 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <ellipse cx="30" cy="40" rx="25" ry="20" fill="white" fill-opacity="0.9" />
+                <ellipse cx="55" cy="30" rx="30" ry="25" fill="white" fill-opacity="0.9" />
+                <ellipse cx="80" cy="35" rx="28" ry="22" fill="white" fill-opacity="0.9" />
+                <ellipse cx="95" cy="42" rx="20" ry="18" fill="white" fill-opacity="0.9" />
+            </svg>
+        </div>
+        <div class="cloud">
+            <svg width="102" height="51" viewBox="0 0 120 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <ellipse cx="30" cy="40" rx="25" ry="20" fill="white" fill-opacity="0.9" />
+                <ellipse cx="55" cy="30" rx="30" ry="25" fill="white" fill-opacity="0.9" />
+                <ellipse cx="80" cy="35" rx="28" ry="22" fill="white" fill-opacity="0.9" />
+                <ellipse cx="95" cy="42" rx="20" ry="18" fill="white" fill-opacity="0.9" />
+            </svg>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav>
+        <ul>
+            <li><a href="#home" class="nav-link active">Home</a></li>
+            <li><a href="#about-section" class="nav-link">About Me</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <div class="typewriter-welcome">
+                <span id="typewriter-text"></span><span class="cursor">|</span>
+            </div>
+
+            <p class="intro-text">My Name is</p>
+            <h1 class="name">Tim Liang</h1>
+            <p class="subtitle">
+                Urban Planning (French Minor) Student<br>
+                at the University of Waterloo
+            </p>
+
+            <div class="scroll-indicator">
+                <div class="scroll-indicator-box">
+                    <div class="scroll-dot"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about-section" id="about-section">
+        <div class="about-container">
+            <h1 class="about-header">
+                I am an <span class="typewriter-profession" id="profession-text"></span><span class="cursor">|</span>
+            </h1>
+
+            <div class="about-content">
+                <div class="about-item">
+                    <h2>About Me</h2>
+                    <p>
+                        I am passionate about creating sustainable and inclusive urban spaces that bring communities together. 
+                        Currently pursuing Urban Planning with a French Minor at the University of Waterloo, I am dedicated to 
+                        understanding how thoughtful design can transform cities and improve quality of life.
+                    </p>
+                </div>
+
+                <div class="about-item">
+                    <h2>My Journey</h2>
+                    <p>
+                        My interest in urban planning comes from a desire to make cities more livable, accessible, and 
+                        environmentally responsible. Through my studies and experiences, I've developed a deep appreciation 
+                        for the intersection of community needs, sustainable development, and innovative design.
+                    </p>
+                </div>
+
+                <div class="about-item">
+                    <h2>Education & Skills</h2>
+                    <p>
+                        As an educator, I believe in sharing knowledge and inspiring others to think critically about the 
+                        spaces we inhabit. My French minor complements my urban planning studies by allowing me to engage 
+                        with international perspectives and diverse cultural approaches to city development.
+                    </p>
+                </div>
+
+                <div class="about-item">
+                    <h2>Looking Forward</h2>
+                    <p>
+                        I am excited to continue learning and growing in the field of urban planning via co-op and other opportunities. 
+                        My goal is to contribute to projects that prioritize sustainability, equitable access to urban transit and housing.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Typewriter Effect for Welcome
+        const welcomeWords = ['Welcome!', 'Bienvenue!', 'Bienvenido!', '欢迎!', 'ようこそ!'];
+        let welcomeIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+        let typewriterElement = document.getElementById('typewriter-text');
+
+        function typeWelcome() {
+            const currentWord = welcomeWords[welcomeIndex];
+            
+            if (!isDeleting && charIndex < currentWord.length) {
+                typewriterElement.textContent = currentWord.substring(0, charIndex + 1);
+                charIndex++;
+                setTimeout(typeWelcome, 150);
+            } else if (isDeleting && charIndex > 0) {
+                typewriterElement.textContent = currentWord.substring(0, charIndex - 1);
+                charIndex--;
+                setTimeout(typeWelcome, 100);
+            } else if (!isDeleting && charIndex === currentWord.length) {
+                setTimeout(() => {
+                    isDeleting = true;
+                    typeWelcome();
+                }, 2000);
+            } else if (isDeleting && charIndex === 0) {
+                isDeleting = false;
+                welcomeIndex = (welcomeIndex + 1) % welcomeWords.length;
+                setTimeout(typeWelcome, 150);
+            }
+        }
+
+        // Typewriter Effect for Profession
+        const professions = ['Urban Planner', 'Educator'];
+        let professionIndex = 0;
+        let profCharIndex = 0;
+        let isProfDeleting = false;
+        let professionElement = document.getElementById('profession-text');
+
+        function typeProfession() {
+            const currentProfession = professions[professionIndex];
+            
+            if (!isProfDeleting && profCharIndex < currentProfession.length) {
+                professionElement.textContent = currentProfession.substring(0, profCharIndex + 1);
+                profCharIndex++;
+                setTimeout(typeProfession, 120);
+            } else if (isProfDeleting && profCharIndex > 0) {
+                professionElement.textContent = currentProfession.substring(0, profCharIndex - 1);
+                profCharIndex--;
+                setTimeout(typeProfession, 80);
+            } else if (!isProfDeleting && profCharIndex === currentProfession.length) {
+                setTimeout(() => {
+                    isProfDeleting = true;
+                    typeProfession();
+                }, 2500);
+            } else if (isProfDeleting && profCharIndex === 0) {
+                isProfDeleting = false;
+                professionIndex = (professionIndex + 1) % professions.length;
+                setTimeout(typeProfession, 120);
+            }
+        }
+
+        // Smooth scrolling for navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+
+        // Update active nav link on scroll
+        window.addEventListener('scroll', () => {
+            const sections = document.querySelectorAll('section[id]');
+            const navLinks = document.querySelectorAll('.nav-link');
+            
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (window.pageYOffset >= sectionTop - 200) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('active');
+                }
+            });
+        });
+
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateX(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.about-item').forEach(item => {
+            item.style.opacity = '0';
+            item.style.transform = 'translateX(-30px)';
+            item.style.transition = 'all 0.6s ease-out';
+            observer.observe(item);
+        });
+
+        // Start typewriter effects
+        typeWelcome();
+        typeProfession();
+    </script>
+</body>
+</html>

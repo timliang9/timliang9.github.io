@@ -105,7 +105,7 @@ nav a:hover{color:#fff;}
 <div class="page">
 
   <section class="hero" id="home">
-    <p class="greeting"><span id="gt">Welcome!</span><span class="cursor"></span> my name is</p>
+    <p class="greeting"><span id="gt">Welcome!</span><span class="cursor"></span> My Name is</p>
     <h1 class="name">Tim Liang</h1>
     <p class="subtitle">Urban Planning (French Minor) Student<br>at the University of Waterloo</p>
   </section>
@@ -148,7 +148,7 @@ const interval = setInterval(() => {
 }, 80);
 
 const greetings=['Welcome!','Bienvenue!'];
-const roles=['Educator','Urban Planner','Transit Enthusiast','Lifelong Learner'];
+const roles=['Educator','Urban Planner','Lifelong Learner'];
 let gi=0,ri=0;
 const gEl=document.getElementById('gt'),rEl=document.getElementById('rt');
 function typeOut(el,text,cb){el.textContent='';let i=0;const t=setInterval(()=>{el.textContent+=text[i++];if(i>=text.length){clearInterval(t);setTimeout(cb,1800);}},80);}
